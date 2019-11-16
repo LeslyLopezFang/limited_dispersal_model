@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import os.path
 import argparse
-import db_model_functions as fun
+import db_model_functions as db
 
 parser = argparse.ArgumentParser(description="Run distance-based model.")
 
@@ -45,9 +45,9 @@ coalescent_time = []
 #Get position of all starting individuals
 pos = range(1,N+1)
 #Get dij matrix: distance between individuals i and individuals j
-dij = fun.get_dij_matrix(N=N,pos=pos)
+dij = db.get_dij_matrix(N=N,pos=pos)
 #Get probability matrix for an individual in each position to get a parent based on position
-pij = fun.probability_picking_parent(param.alpha,dij,N,param.type)
+pij = db.probability_picking_parent(param.alpha,dij,N,param.type)
 
 data=[]
 
