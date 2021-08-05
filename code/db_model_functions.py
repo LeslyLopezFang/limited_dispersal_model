@@ -83,7 +83,8 @@ def probability_picking_parent_two_populations(alpha,dij,N,barrier_size,model_ty
   the barrier is 0. Probability is then re-normalized.
   """
   #Probability without a barrier for one population
-  pij = probability_picking_parent(alpha,dij,N,model_type,error=1e-6)
+  pij = probability_picking_parent(alpha=alpha,dij=dij,N=(2*N)+barrier_size,model_type=model_type
+                   ,error=1e-6)
   #Want to set pij(location=barrier)=0 and re-normalize using log
   denom=np.log(np.sum(pij[N+barrier_size:],axis=0)+np.sum(pij[:N],axis=0))
   pij_log=np.log(pij)
