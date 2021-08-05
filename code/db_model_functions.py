@@ -91,7 +91,7 @@ def probability_picking_parent_two_populations(alpha,dij,N,barrier_size,model_ty
   pij_transformed=pij_log-denom
   pij_transformed=np.exp(pij_transformed)
   pij_transformed[N:N+barrier_size]=0
-  assert False not in (abs(1-np.sum(pij_transformed,axis=0))>error),"Pij transformed not adding to 1 within 1e-06"
+  assert False not in (abs(1-np.sum(pij_transformed,axis=0))<error),"Pij transformed not adding to 1 within 1e-06"
   return pij_transformed
 
 def choose_parent_ind(possible_parents):
