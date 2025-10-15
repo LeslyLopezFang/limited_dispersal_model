@@ -74,4 +74,4 @@ else:
 if os.path.exists(tmrca_dataframe_file):
   tmrca_df.to_csv(tmrca_dataframe_file,index=False,sep="\t",mode="a",header=False)
 else:
-  tmrca_df.to_csv(tmrca_dataframe_file,index=False,sep="\t",mode="a",header=False)
+  tmrca_df.to_csv(tmrca_dataframe_file,index=False,sep="\t")
