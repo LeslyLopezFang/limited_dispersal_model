@@ -46,13 +46,10 @@ grped_bplot.axhline(param.N,color="brown",linestyle='--')
 grped_bplot.set_xlabel(r'Geographic Distance',font=text_font)
 grped_bplot.set_ylabel(r'Pairwise coalescent time',font=text_font)
 
-av_step=50
-ytick_space_from_x_axis=10; min_order=10; max_order=100
-ytick_start=round(min(df.tij_average)) - (round(min(df.tij_average)) % min_order)
-ytick_stop=round(max(df.tij_average)) + (max_order - round(max(df.tij_average)) % max_order)
-#LESLY
-#df.tij_average.min().round() -> gives like 22.0
-#y_ticks=np.arange(np.floor(np.min(df.tij_average))-10,np.max(df.tij_average)+av_step,av_step)
+av_step=10
+min_order_magnitude=10; max_order_magnitude=100
+ytick_start=round(min(df.tij_average)) - (round(min(df.tij_average)) % min_order_magnitude)
+ytick_stop=round(max(df.tij_average)) + (max_order_magnitude - round(max(df.tij_average)) % max_order_magnitude)
 y_ticks=[ytick for ytick in range(ytick_start,ytick_stop+av_step,av_step)]
 grped_bplot.set_yticks(y_ticks)
 

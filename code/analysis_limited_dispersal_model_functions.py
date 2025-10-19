@@ -9,26 +9,25 @@ def get_allelic_matrix(newick_file,N):
      has L number of gene trees.
      Output: numpy array of biallelic alleles and a list of the total branch lengths of each tree. 
   """
-  tree_list=dendropy.TreeList()
-  tree_list.read(path=newick_file,schema="newick")
   #X matrix
   mut_list = []
   #Total tree length
   total_branch_lengths=[]
-  for tree in tree_list:
-    tl = tree.length()
-    total_branch_lengths.append(tl)
-    rn = random.uniform(0,1)
-    breakpt = tl * rn
-    snp_geno = [0]*N
-    tree_length_traversed = 0
-    for branch in tree.postorder_edge_iter():
-      tree_length_traversed += branch.length
-      if tree_length_traversed >= breakpt:
-        for leaf in branch._head_node.leaf_iter():
-          snp_geno[int(leaf.taxon.label)] = 1
-        mut_list.append(snp_geno)
-        break
+  with open(newick_file,'r') as file:
+    for line in file:
+      tree=dendropy.Tree.get(data=line, schema="newick")
+      tl = tree.length()
+      rn = random.uniform(0,1)
+      breakpt = tl * rn
+      snp_geno = [0]*N
+      tree_length_traversed = 0
+      for branch in tree.postorder_edge_iter():
+        tree_length_traversed += branch.length
+        if tree_length_traversed >= breakpt:
+          for leaf in branch._head_node.leaf_iter():
+            snp_geno[int(leaf.taxon.label)] = 1
+          mut_list.append(snp_geno)
+          break
   return(np.asarray(mut_list),total_branch_lengths)
 
 def create_distance_label(x,step=10):
